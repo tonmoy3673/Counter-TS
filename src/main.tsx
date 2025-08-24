@@ -5,11 +5,13 @@ import Home from "./components/Home";
 import "./index.css";
 import About from "./components/About";
 import Contact from "./components/Contact";
+import { ContextProvider } from "./context/Context";
 
 const root = document.getElementById("root") as HTMLElement;
 
 ReactDOM.createRoot(root).render(
-  <BrowserRouter>
+<ContextProvider>
+    <BrowserRouter>
     <Routes>
       <Route path="/" element={<RootLayouts />}>
         <Route index element={<Home />} />
@@ -18,4 +20,5 @@ ReactDOM.createRoot(root).render(
       </Route>
     </Routes>
   </BrowserRouter>
+</ContextProvider>
 );
