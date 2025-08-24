@@ -1,9 +1,10 @@
 interface ButtonProps {
   title: string;
   onClick: () => void;
-  className: string;
-  style: React.CSSProperties;
-  loading: boolean;
+  className?: string;
+  style?: React.CSSProperties;
+  loading?: boolean;
+ 
 }
 
 const CustomButton: React.FC<ButtonProps> = ({
@@ -14,14 +15,16 @@ const CustomButton: React.FC<ButtonProps> = ({
   loading,
 }) => {
   return (
-    <div>
+    <div className="text-center">
       <button
         className={`${className}`}
         onClick={onClick}
-        disabled={loading}
+        
         style={style}
       >
-        {title}
+        {
+            loading ? "Loading" : title
+        }
       </button>
     </div>
   );
