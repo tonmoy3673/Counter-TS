@@ -1,12 +1,5 @@
-import Counter from "../pages/Counter";
-
-
-const Home : React.FC = () => {
-    return (
-        <div>
-           <Counter/>
-        </div>
-    );
+const Home: React.FC = () => {
+  return <div></div>;
 };
 
 export default Home;

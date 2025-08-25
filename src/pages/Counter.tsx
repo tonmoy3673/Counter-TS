@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useCounter } from "../context/Context";
+import { useCounter } from "../context/CounterContext";
 import CustomButton from "./CustomButton";
 
 const Counter: React.FC = () => {

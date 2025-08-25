@@ -5,7 +5,7 @@ import Home from "./components/Home";
 import "./index.css";
 import About from "./components/About";
 import Contact from "./components/Contact";
-import { ContextProvider } from "./context/Context";
+import { ContextProvider } from "./context/CounterContext";
 
 const root = document.getElementById("root") as HTMLElement;
 
