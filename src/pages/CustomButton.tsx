@@ -1,30 +1,21 @@
 interface ButtonProps {
   title: string;
-  onClick: () => void;
   className?: string;
   style?: React.CSSProperties;
-  loading?: boolean;
- 
+  loading: boolean;
+  onClick: () => void;
 }
 
 const CustomButton: React.FC<ButtonProps> = ({
   title,
-  onClick,
   className,
-  style,
+  onClick,
   loading,
 }) => {
   return (
     <div className="text-center">
-      <button
-        className={`${className}`}
-        onClick={onClick}
-        
-        style={style}
-      >
-        {
-            loading ? "Loading" : title
-        }
+      <button className={`w-[130px] ${className}`} onAbort={onClick}>
+        {loading ? "Loading.." : title}
       </button>
     </div>
   );

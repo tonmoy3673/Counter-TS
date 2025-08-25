@@ -5,12 +5,12 @@ import Home from "./components/Home";
 import "./index.css";
 import About from "./components/About";
 import Contact from "./components/Contact";
-import { ContextProvider } from "./context/CounterContext";
+import {CounterContextProvider } from "./context/CounterContext";
 
 const root = document.getElementById("root") as HTMLElement;
 
 ReactDOM.createRoot(root).render(
-<ContextProvider>
+<CounterContextProvider>
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<RootLayouts />}>
@@ -20,5 +20,5 @@ ReactDOM.createRoot(root).render(
       </Route>
     </Routes>
   </BrowserRouter>
-</ContextProvider>
+</CounterContextProvider>
 );
