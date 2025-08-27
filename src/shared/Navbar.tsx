@@ -21,9 +21,9 @@ const Navbar: React.FC = () => {
             className={({ isActive }) =>
               isActive ? "text-blue-500 underline" : "text-gray-700"
             }
-            to="/about"
+            to="/users"
           >
-            About
+            Users
           </NavLink>
           <NavLink
             className={({ isActive }) =>
