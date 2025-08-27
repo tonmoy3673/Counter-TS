@@ -1,37 +1,32 @@
-import { createContext, useContext, useReducer, type ReactNode } from "react";
+import { createContext, useReducer } from "react";
 
-// =========== UserTypes =====//
-interface UserTypes {
+// ======= UserContext ======//
+interface UserContext {
   admin: string;
   buyer: string;
   seller: string;
 }
 
-// ========== UsersAction =======//
-type UsersAction = "admin" | "buyer" | "seller";
+// ========= UserAction =======//
+type UserAction = "admin" | "buyer" | "seller";
 
-// ============ initialState ======//
-
-const initialState: UserTypes = {
-  admin: "",
-  buyer: "",
-  seller: "",
-};
-
-// ========== UsersTypeMethods ====//
-
-interface UsersTypeMethods {
-  state: UserTypes;
+// ========== UserMethod ======//
+interface UserMethod {
+  state: UserContext;
   admin: () => void;
   buyer: () => void;
   seller: () => void;
 }
 
-// =========== UserReducer =========//
-export const UserReducer = (
-  state: UserTypes,
-  action: UsersAction
-): UserTypes => {
+// ====== initialState =====//
+const initialState: UserContext = {
+  admin: "",
+  buyer: "",
+  seller: "",
+};
+
+// =========== UserReducer =====//
+const UserReducer = (state: UserContext, action: UserAction): UserContext => {
   if (action === "admin") {
     return { ...state, admin: state.admin };
   }
@@ -44,31 +39,26 @@ export const UserReducer = (
   return state;
 };
 
-// ======== Create Context ========//
+// ============ CreateUserContext ======//
 
-const UserContext = createContext<UsersTypeMethods | undefined>(undefined);
+const UserContext = createContext<UserMethod | undefined>(undefined);
 
-// ============ UserProvider =======//
-export const UserProvider: React.FC<{ children: ReactNode }> = ({
+// ============== UserContextProvider =====//
+export const UserContextProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [state, dispatch] = useReducer(UserReducer, initialState);
-  const values: UsersTypeMethods = {
+  const values = {
     state,
     admin: () => dispatch("admin"),
     buyer: () => dispatch("buyer"),
     seller: () => dispatch("seller"),
   };
 
-  return <UserContext.Provider value={values}>{children}</UserContext.Provider>;
+  return (
+    <UserContext.Provider value={values}>
+      {children}
+    </UserContext.Provider>
+  )
 };
 
-// =========== CustomUserContext =======//
-
-export const useUserContext = (): UsersTypeMethods => {
-  const context = useContext(UserContext);
-  if (!context) {
-    throw new Error("No Context Data Found");
-  }
-  return context;
-};
