@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useContext, useReducer } from "react";
 
 // ======= UserContext ======//
 interface UserContext {
@@ -62,3 +62,12 @@ export const UserContextProvider: React.FC<{ children: React.ReactNode }> = ({
   )
 };
 
+// ======= custom UserContext ======//
+export const useUserContext = (): UserMethod=>{
+  const context = useContext(UserContext);
+
+  if (!context) {
+    throw new Error('No Context Found')
+  }
+  return context;
+}
