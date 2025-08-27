@@ -2,9 +2,11 @@ import { createContext, useContext, useReducer } from "react";
 
 // ======= UserContext ======//
 interface UserContext {
-  admin: string;
-  buyer: string;
-  seller: string;
+  userType: {
+    admin: string | null;
+    buyer: string | null;
+    seller: string | null;
+  };
 }
 
 // ========= UserAction =======//
@@ -20,21 +22,23 @@ interface UserMethod {
 
 // ====== initialState =====//
 const initialState: UserContext = {
-  admin: "",
-  buyer: "",
-  seller: "",
+  userType: {
+    admin: null,
+    buyer: null,
+    seller: null,
+  },
 };
 
 // =========== UserReducer =====//
 const UserReducer = (state: UserContext, action: UserAction): UserContext => {
   if (action === "admin") {
-    return { ...state, admin: state.admin };
+    return {...state, userType: { ...state.userType, admin: "admin", buyer:"",seller:"" } };
   }
   if (action === "buyer") {
-    return { ...state, buyer: state.buyer };
+    return {...state, userType: { ...state.userType, buyer: "buyer", admin:"", seller:"" } };
   }
   if (action === "seller") {
-    return { ...state, seller: state.seller };
+    return { ...state,userType: { ...state.userType, seller: "seller" ,buyer:"", admin:"" } };
   }
   return state;
 };
@@ -55,19 +59,15 @@ export const UserContextProvider: React.FC<{ children: React.ReactNode }> = ({
     seller: () => dispatch("seller"),
   };
 
-  return (
-    <UserContext.Provider value={values}>
-      {children}
-    </UserContext.Provider>
-  )
+  return <UserContext.Provider value={values}>{children}</UserContext.Provider>;
 };
 
 // ======= custom UserContext ======//
-export const useUserContext = (): UserMethod=>{
+export const useUserContext = (): UserMethod => {
   const context = useContext(UserContext);
 
   if (!context) {
-    throw new Error('No Context Found')
+    throw new Error("No Context Found");
   }
   return context;
-}
+};

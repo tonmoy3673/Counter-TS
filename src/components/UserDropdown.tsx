@@ -1,24 +1,22 @@
 import React, { type ReactNode } from "react";
 
 interface UserDropdownData {
-  title: string;
+  value: string;
   className?: string;
-  onChange?: () => void;
+  onChange?: (e:React.ChangeEvent<HTMLSelectElement>) => void;
   children: ReactNode;
 }
 
 const UserDropdown: React.FC<UserDropdownData> = ({
   children,
   className,
-  title,
+  value,
   onChange,
 }) => {
   return (
     <>
-      <select className={`${className}`}>
-        <option className={`${className}`} onChange={onChange} title={title}>
-          {children}
-        </option>
+      <select className={`${className}`} value={value} onChange={onChange}>
+         {children}
       </select>
     </>
   );
